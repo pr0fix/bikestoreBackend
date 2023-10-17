@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <h1>Edit product</h1>
+    <div>
+
+        <form  th:object="${product}" th:action="@{../saveproduct}" action="#" method="post">
+
+                <input type="hidden" th:field="*{id}">
+
+				<label for="brand">Brand: </label>
+				<input type="text" id="brand" th:field="*{brand}">
+
+
+				<label for="model">Model: </label>
+				<input type="text" id="model" th:field="*{model}">
+
+				<label for="name">Name: </label>
+				<input type="text" id="name" th:field="*{name}">
+
+				<label for="color">Color: </label>
+				<input type="text" id="color" th:field="*{color}">
+
+				<label for="description">Description: </label>
+				<input type="text" id="description" th:field="*{description}">
+
+
+				<label for="manifacturingYear">Manifacturing year: </label>
+				<input type="text" id="manifacturingYear" th:field="*{manifacturingYear}">
+
+				<label for="price">Price: </label>
+				<input type="text" id="price" th:field="*{price}">
+
+				<label for="categorylist"> Category: </label>
+				<select id="categorylist" th:field="*{category}">
+					<option th:each="category : ${categories}" 
+                    th:value="${category.id}" 
+                    th:text="${category.name}">
+					</option>
+				</select>
+
+            <input type="submit" class="btn btn-success" value="Save"></input>
+            <a href="/productlist" class="btn btn-danger">Cancel</a>
+        </form>
+        
+
+
+    </div>
+</body>
+
+</html>

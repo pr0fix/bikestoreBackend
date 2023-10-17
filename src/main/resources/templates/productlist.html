@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Products</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        #logout {
+            padding-bottom: 25px;
+            padding-left: 5px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #linkbutton {
+            display: block;
+            padding-left: 5px;
+            margin: 2px
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <div id="logout">
+        <h2>Welcome, <span sec:authentication="name"></span>!</h2>
+        <form id="logout" th:action="@{/logout}" method="post">
+            <input class="btn btn-danger" type="submit" value="Sign out" />
+        </form>
+    </div>
+
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Description</th>
+                <th>Manifacturing year</th>
+                <th>Price (€)</th>
+                <th>Product category</th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
+
+            </tr>
+
+            <tr th:each="product : ${products}">
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.model}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.color}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.manifacturingYear}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.category.name}"></td>
+                <td>
+                    <a href="@{/add/{id} id=${product.id}}" class="btn btn-success">Add to cart</a>
+                </td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/edit/{id} (id=${product.id})}" class="btn btn-warning">Edit</a>
+                </td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/delete/{id}(id=${product.id})}" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        </table>
+        <div id="linkbutton">
+            <a sec:authorize="hasAuthority('ADMIN')" href="/addproduct" class="btn btn-primary">Add product</a>
+        </div>
+        <div id="linkbutton">
+            <a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-primary">Add category</a>
+        </div>
+        <div id="linkbutton">
+            <a sec:authorize="hasAuthority('ADMIN')" href="/categorylist" class="btn btn-primary">Categories</a>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
