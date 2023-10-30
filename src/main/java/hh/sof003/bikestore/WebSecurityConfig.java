@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 //antMatcher
-//import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,9 +23,9 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authorize -> authorize
-				//.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
-				//.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
-				//.requestMatchers(antMatcher("/saveuser")).permitAll()
+				.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
+				.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
+				.requestMatchers(antMatcher("/saveaccount")).permitAll()
 				.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
 				.anyRequest().authenticated() // any other request needs authentication
 		)
@@ -35,7 +35,7 @@ public class WebSecurityConfig {
 						.frameOptions(frameoptions -> frameoptions
 								.disable()))
 				.formLogin(formlogin -> formlogin
-						//.loginPage("/login")
+						.loginPage("/login")
 						.defaultSuccessUrl("/productlist", true)
 						.permitAll())
 				.logout(logout -> logout

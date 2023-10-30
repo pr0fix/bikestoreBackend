@@ -1,10 +1,16 @@
 package hh.sof003.bikestore.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "accounts")
 public class Account {
@@ -34,6 +40,10 @@ public class Account {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    @JsonIgnoreProperties("account")
+    private List<Order> order;
 
     public Account(String username, String passwordHash, String firstName, String lastName, String email, String phone,
             String role) {

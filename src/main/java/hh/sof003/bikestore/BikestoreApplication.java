@@ -11,7 +11,6 @@ import hh.sof003.bikestore.domain.Account;
 import hh.sof003.bikestore.domain.AccountRepository;
 import hh.sof003.bikestore.domain.Category;
 import hh.sof003.bikestore.domain.CategoryRepository;
-// import hh.sof003.bikestore.domain.Order;
 import hh.sof003.bikestore.domain.OrderRepository;
 import hh.sof003.bikestore.domain.Product;
 import hh.sof003.bikestore.domain.ProductRepository;
@@ -46,6 +45,10 @@ public class BikestoreApplication {
 			productRepository.save(
 					new Product("BMW", "S1000RR", 15990.00, "BMW S1000RR", "A trackbike made for the streets",
 							"White", 2014, category1));
+
+			productRepository.save(
+					new Product("Yamaha", "YZF-R1", 3990.00, "Yamaha R1", "Old but gold",
+							"Blue with white accents", 2001, category1));
 
 			// accounts
 			log.info("Creating and saving a couple of accounts");

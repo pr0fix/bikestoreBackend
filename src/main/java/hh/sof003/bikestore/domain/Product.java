@@ -1,5 +1,7 @@
 package hh.sof003.bikestore.domain;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -7,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -28,6 +32,15 @@ public class Product {
     @JsonIgnoreProperties("products")
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    @ManyToMany
+    @JoinTable(
+        name="order_products",
+        joinColumns = @JoinColumn(name="productId"),
+        inverseJoinColumns = @JoinColumn(name="orderId")
+    )
+    private List<Order> orders;
+
 
     public Product() {
     }
