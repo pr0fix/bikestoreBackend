@@ -13,11 +13,10 @@
 
         <form  th:object="${product}" th:action="@{../saveproduct}" action="#" method="post">
 
-                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{productId}">
 
 				<label for="brand">Brand: </label>
 				<input type="text" id="brand" th:field="*{brand}">
-
 
 				<label for="model">Model: </label>
 				<input type="text" id="model" th:field="*{model}">
@@ -30,7 +29,6 @@
 
 				<label for="description">Description: </label>
 				<input type="text" id="description" th:field="*{description}">
-
 
 				<label for="manifacturingYear">Manifacturing year: </label>
 				<input type="text" id="manifacturingYear" th:field="*{manifacturingYear}">

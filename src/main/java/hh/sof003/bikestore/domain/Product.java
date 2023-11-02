@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long productId;
     private String brand;
     private String model;
     private Double price;
@@ -33,14 +34,9 @@ public class Product {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-    @ManyToMany
-    @JoinTable(
-        name="order_products",
-        joinColumns = @JoinColumn(name="productId"),
-        inverseJoinColumns = @JoinColumn(name="orderId")
-    )
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "productId"), inverseJoinColumns = @JoinColumn(name = "orderId"))
     private List<Order> orders;
-
 
     public Product() {
     }
@@ -58,12 +54,12 @@ public class Product {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getBrand() {
@@ -128,6 +124,22 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [id=" + productId + ", brand=" + brand + ", model=" + model + ", price=" + price + ", name="
+                + name
+                + ", description=" + description + ", color=" + color + ", manifacturingYear=" + manifacturingYear
+                + ", category=" + category;
     }
 
 }

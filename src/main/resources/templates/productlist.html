@@ -65,13 +65,13 @@
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.name}"></td>
                 <td>
-                    <a href="@{/add/{id} (id=${product.id})}" class="btn btn-success">Add to cart</a>
+                    <a href="@{/add/{id} (id=${product.productId})}" class="btn btn-success">Add to cart</a>
                 </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
-                    <a th:href="@{/edit/{id} (id=${product.id})}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{/edit/{id} (id=${product.productId})}" class="btn btn-warning">Edit</a>
                 </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
-                    <a th:href="@{/delete/{id}(id=${product.id})}" class="btn btn-danger">Remove</a>
+                    <a th:href="@{/delete/{id}(id=${product.productId})}" class="btn btn-danger">Remove</a>
                 </td>
             </tr>
         </table>

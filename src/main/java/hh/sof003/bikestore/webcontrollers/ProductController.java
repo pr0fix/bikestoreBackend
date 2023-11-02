@@ -47,17 +47,17 @@ public class ProductController {
     }
 
     // delete product
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{productId}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String deleteProduct(@PathVariable("id") Long productId, Model model) {
+    public String deleteProduct(@PathVariable("productId") Long productId, Model model) {
         productRepository.deleteById(productId);
         return "redirect:../productlist";
     }
 
     // edit product
-    @RequestMapping(value="/edit/{id}", method= RequestMethod.GET)
+    @RequestMapping(value = "/edit/{productId}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String editProduct(@PathVariable("id") Long productId, Model model) {
+    public String editProduct(@PathVariable("productId") Long productId, Model model) {
         model.addAttribute(("product"), productRepository.findById(productId));
         model.addAttribute("categories", categoryRepository.findAll());
         return "editproduct";

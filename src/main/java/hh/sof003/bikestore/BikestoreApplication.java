@@ -1,5 +1,8 @@
 package hh.sof003.bikestore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +14,7 @@ import hh.sof003.bikestore.domain.Account;
 import hh.sof003.bikestore.domain.AccountRepository;
 import hh.sof003.bikestore.domain.Category;
 import hh.sof003.bikestore.domain.CategoryRepository;
+import hh.sof003.bikestore.domain.Order;
 import hh.sof003.bikestore.domain.OrderRepository;
 import hh.sof003.bikestore.domain.Product;
 import hh.sof003.bikestore.domain.ProductRepository;
@@ -39,32 +43,65 @@ public class BikestoreApplication {
 
 			// products
 			log.info("Saving a couple of products into database");
-			productRepository.save(
+			Product product1 = productRepository.save(
 					new Product("Kawasaki", "ZX-6R", 5990.00, "Kawasaki ZX-6R", "A very fast sportsbike", "Matte grey",
 							2008, category1));
-			productRepository.save(
+			Product product2 = productRepository.save(
 					new Product("BMW", "S1000RR", 15990.00, "BMW S1000RR", "A trackbike made for the streets",
 							"White", 2014, category1));
 
-			productRepository.save(
+			Product product3 = productRepository.save(
 					new Product("Yamaha", "YZF-R1", 3990.00, "Yamaha R1", "Old but gold",
 							"Blue with white accents", 2001, category1));
 
 			// accounts
 			log.info("Creating and saving a couple of accounts");
-			accountRepository.save(
+			Account user = accountRepository.save(
 					new Account("user", "$2a$10$mgya6fkqSRPe1sJNsxunl.5.20Q4SIG7iq4c/fLBw4Gc.bAJooS/e", "User",
 							"Userinen", "user@testuser.com", "0501234567", "USER"));
 
-			accountRepository.save(
+			Account admin = accountRepository.save(
 					new Account("admin", "$2a$10$nGhhQkIi6Nofxx5Sadw9GOE/v2LiqWxTSu1X2MMMKRwEQwDi9j49e", "Admin",
 							"Adminen", "admin@testadmin.com", "0507654321", "ADMIN"));
+
+			// first order items
+			List<Product> orderOneItems = new ArrayList<>();
+			orderOneItems.add(product1);
+			orderOneItems.add(product2);
+			orderOneItems.add(product3);
+
+			// second order items
+			List<Product> orderTwoItems = new ArrayList<>();
+			orderTwoItems.add(product3);
+			orderTwoItems.add(product2);
+
+			// orders
+			// Order order1 = orderRepository.save(new Order(orderOneItems, admin, "25-10-2023", "2-11-2023", "debit"));
+			// Order order2 = orderRepository.save(new Order(orderTwoItems, user, "1-1-2023", "5-9-2023", "cash"));
+
+			// fetch categories
+			log.info("fetch all categories");
+			for (Category category : categoryRepository.findAll()) {
+				log.info(category.toString());
+			}
 
 			// fetch products
 			log.info("fetch all products");
 			for (Product product : productRepository.findAll()) {
 				log.info(product.toString());
 			}
+
+			// fetch accounts
+			log.info("fetch all accounts");
+			for (Account account : accountRepository.findAll()) {
+				log.info(account.toString());
+			}
+
+			// fetch orders
+			// log.info("fetch all orders");
+			// for (Order order : orderRepository.findAll()) {
+			// 	log.info(order.toString());
+			// }
 		};
 	};
 }

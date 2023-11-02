@@ -26,6 +26,7 @@ public class WebSecurityConfig {
 				.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
 				.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
 				.requestMatchers(antMatcher("/saveaccount")).permitAll()
+				.requestMatchers(antMatcher("/api/products")).permitAll()
 				.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
 				.anyRequest().authenticated() // any other request needs authentication
 		)

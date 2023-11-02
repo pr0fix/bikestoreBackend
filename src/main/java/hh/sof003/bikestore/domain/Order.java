@@ -18,7 +18,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long orderId;
 
     @ManyToMany(mappedBy = "orders")
     private List<Product> items = new ArrayList<>();
@@ -27,6 +27,7 @@ public class Order {
     @JsonIgnoreProperties("orders")
     @JoinColumn(name = "accountId")
     private Account account;
+
     private String orderDate;
     private String deliveryDate;
     private String paymentMethod;
@@ -42,12 +43,12 @@ public class Order {
     public Order() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getPaymentMethod() {
@@ -88,6 +89,12 @@ public class Order {
 
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Order [id=" + orderId + "account=" + account + ", orderDate=" + orderDate
+                + ", deliveryDate=" + deliveryDate + ", paymentMethod=" + paymentMethod + "]";
     }
 
 }

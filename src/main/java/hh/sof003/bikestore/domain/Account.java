@@ -17,8 +17,8 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    @Column(name = "accountId", nullable = false, updatable = false)
+    private Long accountId;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -60,12 +60,14 @@ public class Account {
 
     }
 
-    public Long getId() {
-        return id;
+    
+
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getUsername() {
@@ -122,6 +124,20 @@ public class Account {
 
     public void setRole(String role) {
         this.role = role;
+    }
+    
+     public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return "Account [id=" + accountId + ", username=" + username + ", passwordHash=" + passwordHash + ", firstName="
+                + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", role=" + role;
     }
 
 }
