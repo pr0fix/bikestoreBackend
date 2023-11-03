@@ -7,9 +7,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 //antMatcher
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,14 +28,23 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
-				.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
-				.requestMatchers(antMatcher("/saveaccount")).permitAll()
-				.requestMatchers(antMatcher("/api/products")).permitAll()
-				.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
-				.anyRequest().authenticated() // any other request needs authentication
-		)
+		http.cors(cors -> {
+			CorsConfiguration configuration = new CorsConfiguration();
+			configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+			configuration.setAllowedMethods(Arrays.asList("GET"));
+			configuration.setAllowedHeaders(List.of("*"));
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", configuration);
+			cors.configurationSource(request -> configuration);
+		})
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
+						.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
+						.requestMatchers(antMatcher("/saveaccount")).permitAll()
+						.requestMatchers(antMatcher("/api/products")).permitAll()
+						.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
+						.anyRequest().authenticated() // any other request needs authentication
+				)
 				.csrf(csrf -> csrf
 						.ignoringRequestMatchers(toH2Console()))
 				.headers(headers -> headers
