@@ -37,8 +37,7 @@ public class Product {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "productId"), inverseJoinColumns = @JoinColumn(name = "orderId"))
+    @ManyToMany(mappedBy = "items")
     private List<Order> orders = new ArrayList<>();
 
     public Product() {
