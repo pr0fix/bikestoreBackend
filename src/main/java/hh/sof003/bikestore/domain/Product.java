@@ -1,5 +1,6 @@
 package hh.sof003.bikestore.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,8 +14,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -36,7 +39,7 @@ public class Product {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "productId"), inverseJoinColumns = @JoinColumn(name = "orderId"))
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public Product() {
     }

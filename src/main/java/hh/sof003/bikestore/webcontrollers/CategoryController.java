@@ -13,7 +13,7 @@ import hh.sof003.bikestore.domain.CategoryRepository;
 @Controller
 public class CategoryController {
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     // Saves added category
     @RequestMapping(value = "/savecategory", method = RequestMethod.POST)

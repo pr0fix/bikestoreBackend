@@ -14,7 +14,7 @@ import hh.sof003.bikestore.domain.ProductRepository;
 public class ProductRestController {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @GetMapping("/products")
     public @ResponseBody List<Product> listAllProducts() {

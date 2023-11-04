@@ -76,8 +76,8 @@ public class BikestoreApplication {
 			orderTwoItems.add(product2);
 
 			// orders
-			// Order order1 = orderRepository.save(new Order(orderOneItems, admin, "25-10-2023", "2-11-2023", "debit"));
-			// Order order2 = orderRepository.save(new Order(orderTwoItems, user, "1-1-2023", "5-9-2023", "cash"));
+			Order order1 = orderRepository.save(new Order(orderOneItems, admin, "25-10-2023", "2-11-2023", "debit"));
+			Order order2 = orderRepository.save(new Order(orderTwoItems, user, "1-1-2023", "5-9-2023", "cash"));
 
 			// fetch categories
 			log.info("fetch all categories");
