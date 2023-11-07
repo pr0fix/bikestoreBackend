@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hh.sof003.bikestore.domain.CategoryRepository;
+import hh.sof003.bikestore.domain.CategoryRepository; 
 import hh.sof003.bikestore.domain.Product;
 import hh.sof003.bikestore.domain.ProductRepository;
+import hh.sof003.bikestore.services.ProductService;
 
 @CrossOrigin
 @Controller
@@ -21,6 +22,9 @@ public class ProductController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductService productService;
 
     // list products
     @RequestMapping(value = "/productlist", method = RequestMethod.GET)
@@ -50,7 +54,7 @@ public class ProductController {
     @RequestMapping(value = "/delete/{productId}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteProduct(@PathVariable("productId") Long productId, Model model) {
-        productRepository.deleteById(productId);
+        productService.deleteProductById(productId);
         return "redirect:../productlist";
     }
 

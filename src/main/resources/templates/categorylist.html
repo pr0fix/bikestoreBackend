@@ -5,15 +5,14 @@
     <title>Categories</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
 </head>
 
 <body>
-    <h1>Categories</h1>
+    <div id="categorylist">
+        <h1>Categories</h1>
 
-    <div>
-
-
-        <table class="table table-bordered">
+        <table id="categorytable" class="table table-bordered">
             <tr>
                 <th>Category</th>
             </tr>
@@ -23,9 +22,10 @@
             </tr>
 
         </table>
-        <a href="/addcategory" class="btn btn-success">Add Category</a>
-        <a href="/productlist" class="btn btn-primary">Back to Products</a>
-
+        <div>
+            <a href="/addcategory" class="btn btn-primary">Add Category</a>
+            <a href="/productlist" class="btn btn-danger">Back to Products</a>
+        </div>
     </div>
 
 </body>

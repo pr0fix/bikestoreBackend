@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 
 public class SignupForm {
 
+    // @NotBlank ? hmmmm??
+
     @NotEmpty(message = "Username cannot be empty.")
     @Size(min = 5, max = 20, message = "Username length must be between 6 and 20 characters.")
     private String username = "";
@@ -19,18 +21,18 @@ public class SignupForm {
     @Size(min = 8, max = 30, message = "Re-type password length must be between 8 and 35 characters.")
     private String passwordCheck = "";
 
-    @NotEmpty(message = "Please give me your fucking name... or else")
+    @NotEmpty(message = "Please give your first name.")
     private String firstName = "";
 
-    @NotEmpty(message = "Your lastname, give it, RIGHT NOW!")
+    @NotEmpty(message = "Please give your last name.")
     private String lastName = "";
 
     @NotEmpty(message = "Email cannot be empty.")
     @Email(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "The email you gave was invalid.")
     private String email = "";
 
-    @NotEmpty(message = "Phone cannot be empty.")
-    @Pattern(regexp = "\\d{10}")
+    @NotEmpty(message = "Please give your phone number.")
+    @Pattern(regexp = "\\d{10}", message = "The phone number you gave was not valid.")
     private String phone = "";
 
     @NotEmpty
@@ -99,6 +101,4 @@ public class SignupForm {
     public void setRole(String role) {
         this.role = role;
     }
-
-    
 }

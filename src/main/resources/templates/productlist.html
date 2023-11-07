@@ -7,31 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
-    <style>
-        #logout {
-            padding-bottom: 25px;
-            padding-left: 5px;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+    <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
 
-        h1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #linkbutton {
-            display: block;
-            padding-left: 5px;
-            margin: 2px
-        }
-    </style>
+   
 </head>
 
 <body>
-    <h1>Products</h1>
+    <h1 style="text-align: center;">Products</h1>
     <div id="logout">
         <h2>Welcome, <span sec:authentication="name"></span>!</h2>
         <form id="logout" th:action="@{/logout}" method="post">
@@ -47,7 +29,7 @@
                 <th>Name</th>
                 <th>Color</th>
                 <th>Description</th>
-                <th>Manifacturing year</th>
+                <th>Manufacturing year</th>
                 <th>Price (€)</th>
                 <th>Product category</th>
                 <th sec:authorize="hasAuthority('ADMIN')"></th>
@@ -61,11 +43,11 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.color != null ? product.color : ''}"></td>
                 <td th:text="${product.description}"></td>
-                <td th:text="${product.manifacturingYear != null ? product.manifacturingYear : ''}"></td>
+                <td th:text="${product.manufacturingYear != null ? product.manufacturingYear : ''}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.name}"></td>
                 <td>
-                    <a href="@{/add/{id} (id=${product.productId})}" class="btn btn-success">Add to cart</a>
+                    <a href="" class="btn btn-success">Add to cart</a>
                 </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/edit/{id} (id=${product.productId})}" class="btn btn-warning">Edit</a>
@@ -75,14 +57,16 @@
                 </td>
             </tr>
         </table>
-        <div id="linkbutton">
-            <a sec:authorize="hasAuthority('ADMIN')" href="/addproduct" class="btn btn-primary">Add product</a>
-        </div>
-        <div id="linkbutton">
-            <a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-primary">Add category</a>
-        </div>
-        <div id="linkbutton">
-            <a sec:authorize="hasAuthority('ADMIN')" href="/categorylist" class="btn btn-primary">Categories</a>
+        <div id="mainpage-links">
+            <div id="mainpage-link-button">
+                <a sec:authorize="hasAuthority('ADMIN')" href="/addproduct" class="btn btn-primary">Add product</a>
+            </div>
+            <div id="mainpage-link-button">
+                <a sec:authorize="hasAuthority('ADMIN')" href="/categorylist" class="btn btn-primary">Categories</a>
+            </div>
+            <div id="mainpage-link-button">
+                <a sec:authorize="hasAuthority('ADMIN')" href="/orderpage" class="btn btn-primary">Orders</a>
+            </div>
         </div>
     </div>
 

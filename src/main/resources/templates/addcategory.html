@@ -5,15 +5,17 @@
     <title>Add category</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
 </head>
 
 <body>
-    <h1>Add category</h1>
-    <div>
+    <div id="category-form">
+        <h1>Add category</h1>
         <form th:object="${category}" th:action="@{savecategory}" action="#" method="post">
-            <label for="category">Category</label>
-            <input type="text" id="category" th:field="*{name}">
-            <input type="submit" value="Save"></input>
+            <label for="category">Category: </label>
+            <input style="height: 40px;" type="text" id="category" th:field="*{name}">
+            <input id="category-form-button" type="submit" value="Save" class="btn btn-success"></input>
+            <a id="category-form-button" href="/productlist" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </body>

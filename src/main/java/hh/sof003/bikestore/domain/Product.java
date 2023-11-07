@@ -1,17 +1,14 @@
 package hh.sof003.bikestore.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -29,7 +26,7 @@ public class Product {
     private String name;
     private String description;
     private String color;
-    private int manifacturingYear;
+    private int manufacturingYear;
     // possibly add kilometers driven?
 
     @ManyToOne
@@ -38,13 +35,13 @@ public class Product {
     private Category category;
 
     @ManyToMany(mappedBy = "items")
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders;
 
     public Product() {
     }
 
     public Product(String brand, String model, Double price, String name, String description, String color,
-            int manifacturingYear, Category category) {
+            int manufacturingYear, Category category) {
         super();
         this.brand = brand;
         this.model = model;
@@ -52,7 +49,7 @@ public class Product {
         this.name = name;
         this.description = description;
         this.color = color;
-        this.manifacturingYear = manifacturingYear;
+        this.manufacturingYear = manufacturingYear;
         this.category = category;
     }
 
@@ -112,12 +109,12 @@ public class Product {
         this.color = color;
     }
 
-    public int getManifacturingYear() {
-        return manifacturingYear;
+    public int getManufacturingYear() {
+        return manufacturingYear;
     }
 
-    public void setManifacturingYear(int manifacturingYear) {
-        this.manifacturingYear = manifacturingYear;
+    public void setManufacturingYear(int manifacturingYear) {
+        this.manufacturingYear = manifacturingYear;
     }
 
     public Category getCategory() {
@@ -140,7 +137,7 @@ public class Product {
     public String toString() {
         return "Product [id=" + productId + ", brand=" + brand + ", model=" + model + ", price=" + price + ", name="
                 + name
-                + ", description=" + description + ", color=" + color + ", manifacturingYear=" + manifacturingYear
+                + ", description=" + description + ", color=" + color + ", manifacturingYear=" + manufacturingYear
                 + ", category=" + category;
     }
 

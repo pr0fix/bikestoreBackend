@@ -2,55 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Edit product</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<title>Edit product</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<style>
+		/* Other pages worked just fine with imported custom css style except this page needed it's own style */
+		#edit-product-form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			background-color: grey;
+			width: 400px;
+			margin: 200px auto;
+			color: white;
+			padding: 30px;
+			border-radius: 30px;
+			text-shadow: rgb(0, 38, 255) 1px 0 10px;
+		}
+	</style>
 </head>
 
 <body>
-    <h1>Edit product</h1>
-    <div>
 
-        <form  th:object="${product}" th:action="@{../saveproduct}" action="#" method="post">
-
-                <input type="hidden" th:field="*{productId}">
-
+	<div id="edit-product-form">
+		<h1>Edit product</h1>
+		<form th:object="${product}" th:action="@{../saveproduct}" action="#" method="post">
+			<div>
+				<input type="hidden" th:field="*{productId}">
+			</div>
+			<div>
 				<label for="brand">Brand: </label>
 				<input type="text" id="brand" th:field="*{brand}">
-
+			</div>
+			<div>
 				<label for="model">Model: </label>
 				<input type="text" id="model" th:field="*{model}">
-
+			</div>
+			<div>
 				<label for="name">Name: </label>
 				<input type="text" id="name" th:field="*{name}">
-
+			</div>
+			<div>
 				<label for="color">Color: </label>
 				<input type="text" id="color" th:field="*{color}">
-
+			</div>
+			<div>
 				<label for="description">Description: </label>
 				<input type="text" id="description" th:field="*{description}">
-
-				<label for="manifacturingYear">Manifacturing year: </label>
-				<input type="text" id="manifacturingYear" th:field="*{manifacturingYear}">
-
+			</div>
+			<div>
+				<label for="manufacturingYear">Manufacturing year: </label>
+				<input type="text" id="manufacturingYear" th:field="*{manufacturingYear}">
+			</div>
+			<div>
 				<label for="price">Price: </label>
 				<input type="text" id="price" th:field="*{price}">
-
+			</div>
+			<div>
 				<label for="categorylist"> Category: </label>
 				<select id="categorylist" th:field="*{category}">
-					<option th:each="category : ${categories}" 
-                    th:value="${category.id}" 
-                    th:text="${category.name}">
+					<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
 					</option>
 				</select>
+			</div>
+			<div>
+				<input type="submit" class="btn btn-success" value="Save"></input>
+				<a style="text-shadow: none;" href="/productlist" class="btn btn-danger">Cancel</a>
+			</div>
+		</form>
 
-            <input type="submit" class="btn btn-success" value="Save"></input>
-            <a href="/productlist" class="btn btn-danger">Cancel</a>
-        </form>
-        
 
-
-    </div>
+	</div>
 </body>
 
 </html>

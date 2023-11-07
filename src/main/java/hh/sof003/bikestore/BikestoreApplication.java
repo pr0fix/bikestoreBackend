@@ -44,14 +44,14 @@ public class BikestoreApplication {
 			// products
 			log.info("Saving a couple of products into database");
 			Product product1 = productRepository.save(
-					new Product("Kawasaki", "ZX-6R", 5990.00, "Kawasaki ZX-6R", "A very fast sportsbike", "Matte grey",
+					new Product("Kawasaki", "ZX-6R", 5990.00, "Kawasaki ZX-6R", "Very fast", "Matte grey",
 							2008, category1));
 			Product product2 = productRepository.save(
-					new Product("BMW", "S1000RR", 15990.00, "BMW S1000RR", "A trackbike made for the streets",
+					new Product("BMW", "S1000RR", 15990.00, "BMW S1000RR", "Even faster",
 							"White", 2014, category1));
 
 			Product product3 = productRepository.save(
-					new Product("Yamaha", "YZF-R1", 3990.00, "Yamaha R1", "Old but gold",
+					new Product("Yamaha", "YZF-R1", 3990.00, "Yamaha R1", "Old but fast",
 							"Blue with white accents", 2001, category1));
 
 			// accounts
@@ -98,10 +98,10 @@ public class BikestoreApplication {
 			}
 
 			// fetch orders
-			// log.info("fetch all orders");
-			// for (Order order : orderRepository.findAll()) {
-			// 	log.info(order.toString());
-			// }
+			log.info("fetch all orders");
+			for (Order order : orderRepository.findAll()) {
+				log.info(order.toString());
+			}
 		};
 	};
 }

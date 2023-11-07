@@ -5,35 +5,12 @@
 <head>
     <title>Login to bookstore </title>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-    <style>
-        .container {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            flex-direction: column;
-            margin: auto;
-            padding: auto;
-        }
-
-        #input_title {
-            display: flex;
-            text-align: start;
-        }
-
-        h1 {
-            display: flex;
-            justify-content: center;
-            text-align: center;
-
-        }
-    </style>
-
+    <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
 </head>
 
 <body>
-    <h1>Please sign in</h1>
-    <div class="container">
+    <div id="login-box">
+        <h1>Please sign in</h1>
         <div class="alert alert-danger" th:if="${param.error}">
             Invalid username and password.
         </div>
