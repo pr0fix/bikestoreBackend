@@ -1,4 +1,4 @@
-package hh.sof003.bikestore;
+package hh.sof003.bikestore.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
