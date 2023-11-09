@@ -20,17 +20,21 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
+
+    // Shows login page
     @RequestMapping(value = "/login")
     public String login() {
         return "login";
     }
 
+    // Shows user a new sign-up form to fill
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String addNewAccount(Model model) {
         model.addAttribute("signupform", new SignupForm());
         return "signup";
     }
 
+    // If all inputs are valid a new account from sign-up form is saved into repository
     @RequestMapping(value = "/saveaccount", method = RequestMethod.POST)
     public String saveAccount(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

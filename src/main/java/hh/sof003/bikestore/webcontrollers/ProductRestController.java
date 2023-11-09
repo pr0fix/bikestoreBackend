@@ -16,6 +16,8 @@ public class ProductRestController {
     @Autowired
     private ProductRepository productRepository;
 
+
+    // REST-api method endpoint for React to use
     @GetMapping("/products")
     public @ResponseBody List<Product> listAllProducts() {
         return (List<Product>) productRepository.findAll();

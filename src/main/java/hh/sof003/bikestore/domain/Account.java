@@ -57,7 +57,13 @@ public class Account {
     }
 
     public Account() {
-
+        this.username = null;
+        this.passwordHash = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.email = null;
+        this.phone = null;
+        this.role = null;
     }
 
     

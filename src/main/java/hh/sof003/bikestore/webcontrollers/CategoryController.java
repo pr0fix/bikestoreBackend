@@ -36,6 +36,6 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
-        return ("addcategory");
+        return "addcategory";
     }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add order</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<!-- <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" /> -->
+</head>
+
+<body>
+	<div id="add-order-form">
+		<h1>Add order</h1>
+		<form th:object="${order}" th:action="@{/saveorder}" action="#" method="post">
+
+			<div>
+				<label for="orderDate">Order date: </label>
+				<input type="text" id="orderDate" th:field="*{orderDate}">
+			</div>
+            <div>
+				<label for="deliveryDate">Delivery date: </label>
+				<input type="text" id="deliveryDate" th:field="*{deliveryDate}">
+			</div>
+            <div>
+				<label for="paymentMethod">Payment method: </label>
+				<input type="text" id="paymentMethod" th:field="*{paymentMethod}">
+			</div>
+            <div>
+				<label for="products">Item: </label>
+				<select id="products" th:field="*{items}">
+                    <option th:each="product : ${products}" th:value="${product.productId}" th:text="${product.name}"></option>
+                </select>
+			</div>
+			
+            <div>
+                <label for="accounts">Account: </label>
+                <select id="accounts" th:field="*{account}">
+                    <option th:each="account : ${accounts}" th:value="${account.accountId}" th:text="${account.firstName}"></option>
+                </select>
+            </div>
+
+			<div>
+				<input type="submit" value="Save" class="btn btn-success"></input>
+				<a style="text-shadow: none;" href="/orders" class="btn btn-danger">Cancel</a>
+			</div>
+		</form>
+
+	</div>
+</body>
+
+</html>

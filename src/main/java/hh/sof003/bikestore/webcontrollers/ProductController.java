@@ -4,17 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hh.sof003.bikestore.domain.CategoryRepository; 
+import hh.sof003.bikestore.domain.CategoryRepository;
 import hh.sof003.bikestore.domain.Product;
 import hh.sof003.bikestore.domain.ProductRepository;
 import hh.sof003.bikestore.services.ProductService;
 
-@CrossOrigin
 @Controller
 public class ProductController {
     @Autowired
@@ -39,7 +37,7 @@ public class ProductController {
     public String addProduct(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryRepository.findAll());
-        return ("addproduct");
+        return "addproduct";
     }
 
     // save product
@@ -47,7 +45,7 @@ public class ProductController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveProduct(Product product) {
         productRepository.save(product);
-        return ("redirect:productlist");
+        return "redirect:productlist";
     }
 
     // delete product

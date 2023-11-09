@@ -30,7 +30,6 @@ public class Category {
     }
 
     public Category() {
-        super();
         this.name = null;
     }
 

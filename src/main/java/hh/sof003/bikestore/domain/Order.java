@@ -29,7 +29,7 @@ public class Order {
         name = "order_products",
         joinColumns = @JoinColumn(name="orderId"),
         inverseJoinColumns = @JoinColumn(name="productId")
-    )
+        )
     private List<Product> items = new ArrayList<>();
 
     @ManyToOne
@@ -50,6 +50,11 @@ public class Order {
     }
 
     public Order() {
+        this.items = null;
+        this.account = null;
+        this.orderDate = null;
+        this.deliveryDate = null;
+        this.paymentMethod = null;
     }
 
     public Long getOrderId() {

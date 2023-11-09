@@ -38,6 +38,14 @@ public class Product {
     private List<Order> orders;
 
     public Product() {
+        this.brand = null;
+        this.model = null;
+        this.price = 0.0;
+        this.name = null;
+        this.description = null;
+        this.color = null;
+        this.manufacturingYear = 0;
+        this.category = null;
     }
 
     public Product(String brand, String model, Double price, String name, String description, String color,
