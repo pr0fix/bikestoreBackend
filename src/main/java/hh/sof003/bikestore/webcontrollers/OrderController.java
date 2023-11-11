@@ -1,13 +1,16 @@
 package hh.sof003.bikestore.webcontrollers;
 
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import hh.sof003.bikestore.domain.Account;
 import hh.sof003.bikestore.domain.AccountRepository;
 import hh.sof003.bikestore.domain.Order;
 import hh.sof003.bikestore.domain.OrderRepository;
@@ -25,13 +28,31 @@ public class OrderController {
     @Autowired
     private ProductRepository productRepository;
 
-    // Admin feature which shows all orders made
+    // Show all orders made (admin feature)
     @RequestMapping(value = "/orderpage", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showOrder(Model model) {
         model.addAttribute("orders", orderRepository.findAll());
         return "orders";
+    }
 
+    @RequestMapping(value = "/orderitem")
+    public String orderItem(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Account account = accountRepository.findByUsername(username);
+
+
+        Order order = new Order();
+        order.setAccount(account);
+
+        model.addAttribute("order", order);
+        model.addAttribute("account", account);
+        model.addAttribute("products", productRepository.findAll());
+
+        return "orderitem";
     }
 
     // Add new order (admin feature)
@@ -46,26 +67,30 @@ public class OrderController {
 
     // Save order (admin feature)
     @RequestMapping(value = "/saveorder", method = RequestMethod.POST)
-    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveOrder(Order order) {
+        order.setOrderDate(getCurrentDateString());
+        order.setDeliveryDate(getDeliveryDate());
         orderRepository.save(order);
-        return "redirect:orderpage";
+        return "redirect:productlist";
     }
 
-    // TODO: Delete order (admin feature)
-    // @RequestMapping(value = "/delete/{orderId}", method = RequestMethod.GET)
-    // public String deleteOrder(@PathVariable("orderId") Long orderId, Model model) {
-    //     orderRepository.deleteById(orderId);
-    //     return "redirect:../orders";
-    // }
+    // Delete order (admin feature)
+    @RequestMapping(value = "/deleteOrder/{orderId}", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String deleteOrder(@PathVariable("orderId") Long orderId, Model model) {
+        orderRepository.deleteById(orderId);
+        return "redirect:../orderpage";
+    }
 
-    // TODO: Edit order (admin feature)
-    // @RequestMapping(value = "/edit/{orderId}", method = RequestMethod.GET)
-    // @PreAuthorize("hasAuthority('ADMIN')")
-    // public String editOrder(@PathVariable("orderId") Long orderId, Model model) {
-    //     model.addAttribute(("order"), orderRepository.findById(orderId));
-    //     model.addAttribute("accounts", accountRepository.findAll());
-    //     model.addAttribute("products", productRepository.findAll());
-    //     return "editorder";
-    // }
+    // Used to generate order date and setting it to current date
+    private LocalDate getCurrentDateString() {
+        return LocalDate.now();
+    }
+
+    // Used to generate imaginary delivery date
+    private LocalDate getDeliveryDate() {
+        LocalDate today = LocalDate.now();
+        int randomNumber = (int) (Math.random() * 30) +1;
+        return today.plusDays(randomNumber);
+    }
 }

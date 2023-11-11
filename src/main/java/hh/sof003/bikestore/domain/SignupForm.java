@@ -1,41 +1,39 @@
 package hh.sof003.bikestore.domain;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class SignupForm {
 
-    // @NotBlank ? hmmmm??
-
-    @NotEmpty(message = "Username cannot be empty.")
+    @NotBlank(message = "Username cannot be empty.")
     @Size(min = 5, max = 20, message = "Username length must be between 6 and 20 characters.")
     private String username = "";
 
-    @NotEmpty(message = "Password cannot be empty.")
+    @NotBlank(message = "Password cannot be empty.")
     @Size(min = 8, max = 30, message = "Password length must be between 8 and 35 characters.")
     private String password = "";
 
-    @NotEmpty(message = "Re-type password cannot be empty.")
+    @NotBlank(message = "Re-type password cannot be empty.")
     @Size(min = 8, max = 30, message = "Re-type password length must be between 8 and 35 characters.")
     private String passwordCheck = "";
 
-    @NotEmpty(message = "Please give your first name.")
+    @NotBlank(message = "Please give your first name.")
     private String firstName = "";
 
-    @NotEmpty(message = "Please give your last name.")
+    @NotBlank(message = "Please give your last name.")
     private String lastName = "";
 
-    @NotEmpty(message = "Email cannot be empty.")
+    @NotBlank(message = "Email cannot be empty.")
     @Email(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "The email you gave was invalid.")
     private String email = "";
 
-    @NotEmpty(message = "Please give your phone number.")
+    @NotBlank(message = "Please give your phone number.")
     @Pattern(regexp = "\\d{10}", message = "The phone number you gave was not valid.")
     private String phone = "";
 
-    @NotEmpty
+    @NotBlank
     private String role = "USER";
 
     public String getUsername() {

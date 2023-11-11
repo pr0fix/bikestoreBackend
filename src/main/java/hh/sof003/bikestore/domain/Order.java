@@ -1,5 +1,6 @@
 package hh.sof003.bikestore.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="orders")
+@Table(name= "orders")
 public class Order {
 
     @Id
@@ -25,11 +28,7 @@ public class Order {
     private Long orderId;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-        name = "order_products",
-        joinColumns = @JoinColumn(name="orderId"),
-        inverseJoinColumns = @JoinColumn(name="productId")
-        )
+    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "productId"))
     private List<Product> items = new ArrayList<>();
 
     @ManyToOne
@@ -37,11 +36,17 @@ public class Order {
     @JoinColumn(name = "accountId")
     private Account account;
 
-    private String orderDate;
-    private String deliveryDate;
+    @NotNull
+    private LocalDate orderDate;
+    
+    @NotNull
+    private LocalDate deliveryDate;
+
+    @NotBlank
     private String paymentMethod;
 
-    public Order(List<Product> items, Account account, String orderDate, String deliveryDate, String paymentMethod) {
+    public Order(List<Product> items, Account account, LocalDate orderDate, LocalDate deliveryDate,
+            String paymentMethod) {
         this.items = items;
         this.account = account;
         this.orderDate = orderDate;
@@ -50,7 +55,7 @@ public class Order {
     }
 
     public Order() {
-        this.items = null;
+        this.items = new ArrayList<>();
         this.account = null;
         this.orderDate = null;
         this.deliveryDate = null;
@@ -89,25 +94,25 @@ public class Order {
         this.account = account;
     }
 
-    public String getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
-    public String getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(String deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
     @Override
     public String toString() {
-        return "Order [id=" + orderId + "account=" + account + ", orderDate=" + orderDate
+        return "Order [id=" + orderId + ", account=" + account + ", orderDate=" + orderDate
                 + ", deliveryDate=" + deliveryDate + ", paymentMethod=" + paymentMethod + "]";
     }
 

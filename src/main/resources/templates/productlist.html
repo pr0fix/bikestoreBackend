@@ -9,19 +9,20 @@
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
 
-   
+
 </head>
 
 <body>
     <h1 style="text-align: center;">Products</h1>
     <div id="logout">
-        
+
         <h2>Welcome, <span sec:authentication="name"></span>!</h2>
         <form id="logout" th:action="@{/logout}" method="post">
-            <input sec:authorize="hasAuthority('ADMIN') || hasAuthority('USER')" class="btn btn-danger" type="submit" value="Sign out" />
+            <input sec:authorize="hasAuthority('ADMIN') || hasAuthority('USER')" class="btn btn-danger" type="submit"
+                value="Sign out" />
         </form>
         <div sec:authorize="isAnonymous()">
-        <a id="mainpage-link-button" href="/login" class="btn btn-success">Login</a>
+            <a id="mainpage-link-button" href="/login" class="btn btn-success">Login</a>
         </div>
     </div>
 
@@ -50,9 +51,6 @@
                 <td th:text="${product.manufacturingYear != null ? product.manufacturingYear : ''}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.name}"></td>
-                <td sec:authorize="hasAuthority('USER') || hasAuthority('ADMIN')">
-                    <a href="" class="btn btn-success">Add to cart</a>
-                </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/edit/{id} (id=${product.productId})}" class="btn btn-warning">Edit</a>
                 </td>
@@ -61,6 +59,8 @@
                 </td>
             </tr>
         </table>
+
+        
         <div id="mainpage-links">
             <div id="mainpage-link-button">
                 <a sec:authorize="hasAuthority('ADMIN')" href="/addproduct" class="btn btn-primary">Add product</a>
@@ -71,7 +71,12 @@
             <div id="mainpage-link-button">
                 <a sec:authorize="hasAuthority('ADMIN')" href="/orderpage" class="btn btn-primary">Orders</a>
             </div>
+            <div id="mainpage-link-button">
+                <a sec:authorize="hasAuthority('ADMIN') || hasAuthority('USER')" href="/orderitem"
+                    class="btn btn-success">Place an order</a>
+            </div>
         </div>
+        
     </div>
 
 

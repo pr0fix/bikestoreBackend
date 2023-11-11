@@ -1,5 +1,6 @@
 package hh.sof003.bikestore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +59,11 @@ public class BikestoreApplication {
 			log.info("Creating and saving a couple of accounts");
 			Account user = accountRepository.save(
 					new Account("user", "$2a$10$mgya6fkqSRPe1sJNsxunl.5.20Q4SIG7iq4c/fLBw4Gc.bAJooS/e", "User",
-							"Userinen", "user@testuser.com", "0501234567", "USER"));
+							"User", "user@testuser.com", "0501234567", "USER"));
 
 			Account admin = accountRepository.save(
 					new Account("admin", "$2a$10$nGhhQkIi6Nofxx5Sadw9GOE/v2LiqWxTSu1X2MMMKRwEQwDi9j49e", "Admin",
-							"Adminen", "admin@testadmin.com", "0507654321", "ADMIN"));
+							"Admin", "admin@testadmin.com", "0507654321", "ADMIN"));
 
 			// first order items
 			List<Product> orderOneItems = new ArrayList<>();
@@ -76,8 +77,8 @@ public class BikestoreApplication {
 			orderTwoItems.add(product2);
 
 			// orders
-			Order order1 = orderRepository.save(new Order(orderOneItems, admin, "25-10-2023", "2-11-2023", "debit"));
-			Order order2 = orderRepository.save(new Order(orderTwoItems, user, "1-1-2023", "5-9-2023", "cash"));
+			Order order1 = orderRepository.save(new Order(orderOneItems, admin, LocalDate.of(2023, 11, 3), LocalDate.of(2023, 9, 10), "cash"));
+			Order order2 = orderRepository.save(new Order(orderTwoItems, user, LocalDate.now(), LocalDate.now().plusDays(3), "debit"));
 
 			// fetch categories
 			log.info("fetch all categories");

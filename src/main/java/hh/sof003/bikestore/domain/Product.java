@@ -121,8 +121,8 @@ public class Product {
         return manufacturingYear;
     }
 
-    public void setManufacturingYear(int manifacturingYear) {
-        this.manufacturingYear = manifacturingYear;
+    public void setManufacturingYear(int manufacturingYear) {
+        this.manufacturingYear = manufacturingYear;
     }
 
     public Category getCategory() {

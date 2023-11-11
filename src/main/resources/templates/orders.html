@@ -12,9 +12,9 @@
 
 <body>
     <div style="text-align: center;">
-    <h1>Orders</h1>
-    <a style="margin-bottom: 5px; margin-left: 2px;" href="/addorder" class="btn btn-primary">Create order</a> 
-    <a style="margin-bottom: 5px; margin-left: 2px;" href="/productlist" class="btn btn-danger">Back to products</a>    
+        <h1>Orders</h1>
+        <a style="margin-bottom: 5px; margin-left: 2px;" href="/addorder" class="btn btn-primary">Create order</a>
+        <a style="margin-bottom: 5px; margin-left: 2px;" href="/productlist" class="btn btn-danger">Back to products</a>
     </div>
     <div>
         <table class="table table-bordered">
@@ -22,6 +22,7 @@
                 <th>Order ID</th>
                 <th>Order details</th>
                 <th>Products</th>
+                <th></th>
             </tr>
 
             <tr th:each="order : ${orders}">
@@ -41,7 +42,6 @@
                             <td th:text="${account.lastName}"></td>
                             <td th:text="${account.email}"></td>
                             <td th:text="${account.phone}"></td>
-
                         </tr>
                     </table>
                 </td>
@@ -70,11 +70,16 @@
                         </tr>
                     </table>
                 </td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/deleteOrder/{orderId}(orderId=${order.orderId})}" class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
             </tr>
         </table>
 
     </div>
-    
+
 
 </body>
 
