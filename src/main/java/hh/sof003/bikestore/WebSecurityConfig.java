@@ -44,6 +44,7 @@ public class WebSecurityConfig {
 						.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
 						.requestMatchers(antMatcher("/saveaccount")).permitAll()
 						.requestMatchers(antMatcher("/api/products")).permitAll()
+						.requestMatchers(antMatcher("/productlist")).permitAll()
 						.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
 						.anyRequest().authenticated() // any other request needs authentication
 				)

@@ -12,6 +12,20 @@
     margin-bottom: 5px;
 }
 
+/* addorder.html */
+
+#add-order-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: grey;
+    width: 400px;
+    margin: 200px auto;
+    color: white;
+    padding: 30px;
+    border-radius: 30px;
+    text-shadow: rgb(0, 38, 255) 1px 0 10px;
+}
 
 /* addproduct.html */
 
