@@ -33,7 +33,8 @@ public class WebSecurityConfig {
 			"/api/products/{productId}",
 			"/productlist",
 			"/api/categories",
-			"/api/categories/{categoryId}");
+			"/api/categories/{categoryId}",
+			"/h2-console/**");
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -50,8 +51,6 @@ public class WebSecurityConfig {
 					for (String pattern : ALLOWED_URLS) {
 						authorize.requestMatchers(antMatcher(pattern)).permitAll();
 					}
-					authorize.requestMatchers(toH2Console()).permitAll()
-							.anyRequest().authenticated();
 				})
 				.csrf(csrf -> csrf
 						.ignoringRequestMatchers(toH2Console()))
