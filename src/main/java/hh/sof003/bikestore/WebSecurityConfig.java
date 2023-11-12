@@ -51,6 +51,7 @@ public class WebSecurityConfig {
 					for (String pattern : ALLOWED_URLS) {
 						authorize.requestMatchers(antMatcher(pattern)).permitAll();
 					}
+					authorize.anyRequest().authenticated();
 				})
 				.csrf(csrf -> csrf
 						.ignoringRequestMatchers("/h2-console/**"))
