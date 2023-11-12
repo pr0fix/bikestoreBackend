@@ -1,4 +1,5 @@
 /* addcategory.html */
+
 #category-form {
     display: flex;
     text-align: center;
@@ -53,7 +54,6 @@
     text-align: center;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     flex-direction: column;
 }
 
@@ -94,6 +94,7 @@
 }
 
 /* signup-page */
+
 #sign-up-box {
     display: flex;
     align-items: center;

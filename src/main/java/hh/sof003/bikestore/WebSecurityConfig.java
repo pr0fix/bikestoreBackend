@@ -9,17 +9,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import hh.sof003.bikestore.services.AccountDetailServiceImpl;
 
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
-//antMatcher
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 import java.util.Arrays;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -27,6 +24,16 @@ public class WebSecurityConfig {
 
 	@Autowired
 	private AccountDetailServiceImpl accountDetailService;
+
+	private static final List<String> ALLOWED_URLS = Arrays.asList(
+			"/css/**",
+			"/signup",
+			"/saveaccount",
+			"/api/products",
+			"/api/products/{productId}",
+			"/productlist",
+			"/api/categories",
+			"/api/categories/{categoryId}");
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -39,15 +46,13 @@ public class WebSecurityConfig {
 			source.registerCorsConfiguration("/**", configuration);
 			cors.configurationSource(request -> configuration);
 		})
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(antMatcher("/css/**")).permitAll() // allows css file to be used without login
-						.requestMatchers(antMatcher("/signup")).permitAll() // allows all users to see signup-page
-						.requestMatchers(antMatcher("/saveaccount")).permitAll()
-						.requestMatchers(antMatcher("/api/products")).permitAll()
-						.requestMatchers(antMatcher("/productlist")).permitAll()
-						.requestMatchers(toH2Console()).permitAll() // allows all users to see saveuser-page
-						.anyRequest().authenticated() // any other request needs authentication
-				)
+				.authorizeHttpRequests(authorize -> {
+					for (String pattern : ALLOWED_URLS) {
+						authorize.requestMatchers(antMatcher(pattern)).permitAll();
+					}
+					authorize.requestMatchers(toH2Console()).permitAll()
+							.anyRequest().authenticated();
+				})
 				.csrf(csrf -> csrf
 						.ignoringRequestMatchers(toH2Console()))
 				.headers(headers -> headers
