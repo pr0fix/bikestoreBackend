@@ -36,6 +36,7 @@ public class OrderController {
         return "orders";
     }
 
+    // Show a product ordering form with account pre-filled with the one currently logged in
     @RequestMapping(value = "/orderitem")
     public String orderItem(Model model) {
 

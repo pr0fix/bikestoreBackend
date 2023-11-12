@@ -27,6 +27,7 @@
 
             <tr th:each="order : ${orders}">
                 <td th:text="${order.orderId}"></td>
+
                 <td>
                     <table style="text-align: center;">
                         <tr>
@@ -35,13 +36,20 @@
                             <th>Lastname</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Order date</th>
+                            <th>Delivery date</th>
+                            <th>Payment method</th>
                         </tr>
-                        <tr th:each="account : ${order.account}">
-                            <td th:text="${account.accountId}"></td>
-                            <td th:text="${account.firstName}"></td>
-                            <td th:text="${account.lastName}"></td>
-                            <td th:text="${account.email}"></td>
-                            <td th:text="${account.phone}"></td>
+                        <tr>
+                            <td th:text="${order.account.accountId}"></td>
+                            <td th:text="${order.account.firstName}"></td>
+                            <td th:text="${order.account.lastName}"></td>
+                            <td th:text="${order.account.email}"></td>
+                            <td th:text="${order.account.phone}"></td>
+                            <td th:text="${order.orderDate}"></td>
+                            <td th:text="${order.deliveryDate}"></td>
+                            <td th:text="${order.paymentMethod}"></td>
+                            
                         </tr>
                     </table>
                 </td>
