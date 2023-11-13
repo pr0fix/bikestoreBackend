@@ -11,7 +11,7 @@
 <body>
     <div id="order-form">
         <h1>Place an order</h1>
-        <form th:object="${order}" th:action="@{/saveorder}" action="#" method="post">
+        <form th:object="${order}" th:action="@{/saveorder}" action="#" method="post" target="_blank">
 
             <div>
                 <label for="paymentMethod">Payment method: </label>
@@ -38,7 +38,7 @@
             </div>
 
             <div>
-                <input type="submit" value="Place an order" class="btn btn-success"></input>
+                <input onclick="window.location.href = 'orderconfirmation'" type="submit" value="Place an order" class="btn btn-success"></input>
                 <a style="text-shadow: none;" href="/productlist" class="btn btn-danger">Cancel</a>
             </div>
         </form>

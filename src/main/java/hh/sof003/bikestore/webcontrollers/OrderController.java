@@ -83,6 +83,13 @@ public class OrderController {
         return "redirect:../orderpage";
     }
 
+    // Simple confirmation page for order
+    @RequestMapping(value="/orderconfirmation", method = RequestMethod.GET)
+    public String confirmOrder() {
+        return "orderconfirmation";
+    }
+
+
     // Used to generate order date and setting it to current date
     private LocalDate getCurrentDateString() {
         return LocalDate.now();
