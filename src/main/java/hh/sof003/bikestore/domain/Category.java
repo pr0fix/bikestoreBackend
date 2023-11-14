@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category {
 
     @Id
@@ -33,12 +33,12 @@ public class Category {
         this.name = null;
     }
 
-    public long getId() {
+    public long getCategoryId() {
         return categoryId;
     }
 
-    public void setId(long id) {
-        this.categoryId = id;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

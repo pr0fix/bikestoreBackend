@@ -36,7 +36,8 @@ public class OrderController {
         return "orders";
     }
 
-    // Show a product ordering form with account pre-filled with the one currently logged in
+    // Show a product ordering form with account pre-filled with the one currently
+    // logged in
     @RequestMapping(value = "/orderitem")
     public String orderItem(Model model) {
 
@@ -44,7 +45,6 @@ public class OrderController {
         String username = authentication.getName();
 
         Account account = accountRepository.findByUsername(username);
-
 
         Order order = new Order();
         order.setAccount(account);
@@ -72,7 +72,7 @@ public class OrderController {
         order.setOrderDate(getCurrentDateString());
         order.setDeliveryDate(getDeliveryDate());
         orderRepository.save(order);
-        return "redirect:productlist";
+        return "redirect:orderconfirmation";
     }
 
     // Delete order (admin feature)
@@ -84,11 +84,10 @@ public class OrderController {
     }
 
     // Simple confirmation page for order
-    @RequestMapping(value="/orderconfirmation", method = RequestMethod.GET)
+    @RequestMapping(value = "/orderconfirmation", method = RequestMethod.GET)
     public String confirmOrder() {
         return "orderconfirmation";
     }
-
 
     // Used to generate order date and setting it to current date
     private LocalDate getCurrentDateString() {
@@ -98,7 +97,7 @@ public class OrderController {
     // Used to generate imaginary delivery date
     private LocalDate getDeliveryDate() {
         LocalDate today = LocalDate.now();
-        int randomNumber = (int) (Math.random() * 30) +1;
+        int randomNumber = (int) (Math.random() * 30) + 1;
         return today.plusDays(randomNumber);
     }
 }

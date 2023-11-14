@@ -16,9 +16,10 @@
     <h1 style="text-align: center;">Products</h1>
     <div id="logout">
 
-        <h2>Welcome, <span sec:authentication="name"></span>!</h2>
+        <h2 sec:authorize="isAuthenticated()">Welcome, <span sec:authentication="name"></span>!</h2>
+        <h2 sec:authorize="isAnonymous()">Welcome to bikestore!</h2>
         <form id="logout" th:action="@{/logout}" method="post">
-            <input sec:authorize="hasAuthority('ADMIN') || hasAuthority('USER')" class="btn btn-danger" type="submit"
+            <input sec:authorize="isAuthenticated()" class="btn btn-danger" type="submit"
                 value="Sign out" />
         </form>
         <div sec:authorize="isAnonymous()">
