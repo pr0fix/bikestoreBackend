@@ -54,10 +54,8 @@ public class WebSecurityConfig {
 					authorize.anyRequest().authenticated();
 				})
 				.csrf(csrf -> csrf
-						// Application crashes for some reason if using
-						// .ignoringRequestMatchers("/h2-console/**")) but Render deployment doesn't
-						// work with toH2Console()
-						.ignoringRequestMatchers(toH2Console()))
+
+						.ignoringRequestMatchers("/h2-console/**"))
 				.headers(headers -> headers
 						.frameOptions(frameoptions -> frameoptions
 								.disable()))
