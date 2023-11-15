@@ -12,6 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -20,14 +24,29 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
+
+    @NotBlank(message = "Please give product brand.")
     private String brand;
+
+    @NotBlank(message = "Please give product model.")
     private String model;
+
+    @NotNull(message = "Please give product price.")
+    @DecimalMin(value = "0.0", message = "Price must be greater than or equal to \"0.0\".")
     private Double price;
+
+    @NotBlank(message = "Please give product name.")
     private String name;
+
+    @NotBlank(message = "Please give product description.")
     private String description;
+
+    @NotBlank(message = "Please give product color.")
     private String color;
+
+    @NotNull(message = "Please give product manufacturing year.")
+    @Min(value = 1900, message = "Manufacturing year must be after 1900.")
     private int manufacturingYear;
-    // possibly add kilometers driven?
 
     @ManyToOne
     @JsonIgnoreProperties("products")

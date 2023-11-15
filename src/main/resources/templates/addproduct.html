@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
 	<title>Add product</title>
@@ -15,38 +16,43 @@
 			<div>
 				<label for="brand">Brand: </label>
 				<input type="text" id="brand" th:field="*{brand}">
+				<p th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Product brand error</p>
 			</div>
 			<div>
 				<label for="model">Model: </label>
 				<input type="text" id="model" th:field="*{model}">
+				<p th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Product model error</p>
 			</div>
 			<div>
 				<label for="name">Name: </label>
 				<input type="text" id="name" th:field="*{name}">
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product name error</p>
 			</div>
 			<div>
 				<label for="color">Color: </label>
 				<input type="text" id="color" th:field="*{color}">
+				<p th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Product color error</p>
 			</div>
 			<div>
 				<label for="description">Description: </label>
 				<input type="text" id="description" th:field="*{description}">
+				<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Product description error</p>
 			</div>
 			<div>
 				<label for="manufacturingYear">Manufacturing year: </label>
 				<input type="number" id="manufacturingYear" th:field="*{manufacturingYear}">
+				<p th:if="${#fields.hasErrors('manufacturingYear')}" th:errors="*{manufacturingYear}">Product manufacturing year error</p>
 			</div>
 			<div>
 				<label for="price">Price: </label>
 				<input type="number" id="price" th:field="*{price}">
+				<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Product price error</p>
 			</div>
 			<div>
 				<label for="categorylist"> Category: </label>
 				<select id="categorylist" th:field="*{category}">
 					<option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}">
 					</option>
-
-
 				</select>
 			</div>
 			<div>

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
 	<title>Add order</title>
@@ -26,7 +27,7 @@
 				<select id="paymentMethod" th:field="*{paymentMethod}">
 					<option value="debit">Debit</option>
 					<option value="credit">Credit</option>
-					<option value="cash">Cash</option>
+					<option value="banktransfer">Bank transfer</option>
 				</select>
 			</div>
 			
@@ -34,7 +35,7 @@
 				<label>Items: </label>
 				<div th:each="product : ${products}">
 					<input type="checkbox" th:id="'product_' + ${product.productId}" th:name="'items'" th:value="${product.productId}" />
-					<label th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br/>
+					<label style="text-shadow: none;" th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br/>
 				</div>
 			</div>
 

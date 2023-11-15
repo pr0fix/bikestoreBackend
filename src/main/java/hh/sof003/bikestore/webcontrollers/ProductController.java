@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,7 @@ import hh.sof003.bikestore.domain.CategoryRepository;
 import hh.sof003.bikestore.domain.Product;
 import hh.sof003.bikestore.domain.ProductRepository;
 import hh.sof003.bikestore.services.ProductService;
+import jakarta.validation.Valid;
 
 @Controller
 public class ProductController {
@@ -43,9 +46,15 @@ public class ProductController {
     // save product
     @RequestMapping(value = "/saveproduct", method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String saveProduct(Product product) {
-        productRepository.save(product);
-        return "redirect:productlist";
+    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult,
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "addproduct";
+        } else {
+            productRepository.save(product);
+            return "redirect:productlist";
+        }
     }
 
     // delete product

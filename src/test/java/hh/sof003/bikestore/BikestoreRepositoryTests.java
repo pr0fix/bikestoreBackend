@@ -26,8 +26,6 @@ import hh.sof003.bikestore.domain.ProductRepository;
 @DataJpaTest
 public class BikestoreRepositoryTests {
 
-    // TODO: test editing
-
     @Autowired
     private AccountRepository accountRepository;
 

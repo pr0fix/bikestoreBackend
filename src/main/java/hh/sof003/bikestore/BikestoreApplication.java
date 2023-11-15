@@ -39,7 +39,7 @@ public class BikestoreApplication {
 			categoryRepository.save(category1);
 			Category category2 = new Category("Gear");
 			categoryRepository.save(category2);
-			Category category3 = new Category("Spareparts");
+			Category category3 = new Category("Spare parts");
 			categoryRepository.save(category3);
 
 			// products
@@ -77,8 +77,10 @@ public class BikestoreApplication {
 			orderTwoItems.add(product2);
 
 			// orders
-			Order order1 = orderRepository.save(new Order(orderOneItems, admin, LocalDate.of(2023, 11, 3), LocalDate.of(2023, 9, 10), "credit"));
-			Order order2 = orderRepository.save(new Order(orderTwoItems, user, LocalDate.now(), LocalDate.now().plusDays(3), "debit"));
+			Order order1 = orderRepository.save(
+					new Order(orderOneItems, admin, LocalDate.of(2023, 11, 3), LocalDate.of(2023, 9, 10), "credit"));
+			Order order2 = orderRepository
+					.save(new Order(orderTwoItems, user, LocalDate.now(), LocalDate.now().plusDays(3), "debit"));
 
 			// fetch categories
 			log.info("fetch all categories");

@@ -37,8 +37,9 @@ public class OrderController {
     }
 
     // Show a product ordering form with account pre-filled with the one currently
-    // logged in
+    // logged in. (user feature)
     @RequestMapping(value = "/orderitem")
+    @PreAuthorize("isAuthenticated()")
     public String orderItem(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -66,14 +67,14 @@ public class OrderController {
         return "addorder";
     }
 
-    // Save order (admin feature)
-    @RequestMapping(value = "/saveorder", method = RequestMethod.POST)
-    public String saveOrder(Order order) {
-        order.setOrderDate(getCurrentDateString());
-        order.setDeliveryDate(getDeliveryDate());
-        orderRepository.save(order);
-        return "redirect:orderconfirmation";
-    }
+     // Save order (admin feature)
+     @RequestMapping(value = "/saveorder", method = RequestMethod.POST)
+     public String saveOrder(Order order) {
+         order.setOrderDate(getCurrentDateString());
+         order.setDeliveryDate(getDeliveryDate());
+         orderRepository.save(order);
+         return "redirect:orderconfirmation";
+     }
 
     // Delete order (admin feature)
     @RequestMapping(value = "/deleteOrder/{orderId}", method = RequestMethod.GET)
