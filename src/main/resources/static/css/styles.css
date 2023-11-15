@@ -125,3 +125,18 @@
     border-radius: 30px;
     text-shadow: rgb(0, 38, 255) 1px 0 10px;
 }
+
+/* orderconfirmation.html */
+
+#confirm-text {
+    border: 5px solid;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}

@@ -26,6 +26,8 @@ import hh.sof003.bikestore.domain.ProductRepository;
 @DataJpaTest
 public class BikestoreRepositoryTests {
 
+    // TODO: test editing
+
     @Autowired
     private AccountRepository accountRepository;
 
@@ -38,9 +40,11 @@ public class BikestoreRepositoryTests {
     @Autowired
     private ProductRepository productRepository;
 
+
     // AccountRepository tests:
 
-    // Create account
+
+    // Create and save account to repository
     @Test
     public void createNewAccount() {
         Account account = new Account("testUser", "$2a$12$yPQtwI.//kN17rUhUTgr6eUoD8bRyOidYOqbV5A96NG.SDkIpLczi",
@@ -49,7 +53,7 @@ public class BikestoreRepositoryTests {
         assertThat(account.getAccountId()).isNotNull();
     }
 
-    // Delete account
+    // Delete and save account to repository
     @Test
     public void deleteAccount() {
         Account account = new Account("testUser", "$2a$12$yPQtwI.//kN17rUhUTgr6eUoD8bRyOidYOqbV5A96NG.SDkIpLczi",
@@ -61,7 +65,7 @@ public class BikestoreRepositoryTests {
         assertNull(deletedAccount);
     }
 
-    // Find account by username
+    // Find account by username from repository
     @Test
     public void findAccountByUsername() {
         List<Account> accounts = accountRepository.findUserByUsername("user");
@@ -69,7 +73,7 @@ public class BikestoreRepositoryTests {
         assertThat(accounts.get(0).getFirstName()).isEqualTo("User");
     }
 
-    // Find all accounts
+    // Find all accounts from repository
     @Test
     public void findAllAccounts() {
         List<Account> accounts = (List<Account>) accountRepository.findAll();
@@ -77,9 +81,11 @@ public class BikestoreRepositoryTests {
         assertThat(accounts.iterator().hasNext());
     }
 
+
     // CategoryRepository tests:
 
-    // Create and save a new category to database
+
+    // Create and save a new category to repository
     @Test
     public void createNewCategory() {
         Category category = new Category("Tires");
@@ -88,7 +94,7 @@ public class BikestoreRepositoryTests {
         assertThat(category.getCategoryId()).isNotNull();
     }
 
-    // Delete category from database
+    // Delete category from repository
     @Test
     public void deleteCategory() {
         Category category = new Category("Tires");
@@ -99,7 +105,7 @@ public class BikestoreRepositoryTests {
         assertNull(deletedCategory);
     }
 
-    // Find category by name from database
+    // Find category by name from repository
     @Test
     public void findCategoryByName() {
         List<Category> categories = categoryRepository.findByName("Motorcycles");
@@ -108,7 +114,7 @@ public class BikestoreRepositoryTests {
         assertThat(categories.get(0).getCategoryId()).isEqualTo(1);
     }
 
-    // Find all categories in database
+    // Find all categories in repository
     @Test
     public void findAllCategories() {
         List<Category> categories = (List<Category>) categoryRepository.findAll();
@@ -116,9 +122,11 @@ public class BikestoreRepositoryTests {
         assertThat(categories.iterator().hasNext());
     }
 
+
     // OrderRepository tests:
 
-    // Create and save a new order to database
+
+    // Create and save a new order to repository
     @Test
     public void createNewOrder() {
         Product product1 = new Product();
@@ -133,7 +141,7 @@ public class BikestoreRepositoryTests {
         assertThat(order.getOrderId()).isNotNull();
     }
 
-    // Delete order from database
+    // Delete order from repository
     @Test
     public void deleteOrder() {
         Product product1 = new Product();
@@ -153,7 +161,7 @@ public class BikestoreRepositoryTests {
         assertNull(deletedOrder);
     }
 
-    // Find order from database by account username
+    // Find order from repository by account username
     @Test
     public void findOrderByAccount() {
         List<Order> order = orderRepository.findByAccount(accountRepository.findByUsername("user"));
@@ -164,7 +172,7 @@ public class BikestoreRepositoryTests {
         assertThat(nonExistentOrder.size()).isEqualTo(0);
     }
 
-    // Find all orders from database
+    // Find all orders from repository
     @Test
     public void findAllOrders() {
         List<Order> orders = (List<Order>) orderRepository.findAll();
@@ -173,25 +181,52 @@ public class BikestoreRepositoryTests {
         assertThat(orders).isNotEmpty();
     }
 
-    // TODO: ProductRepository tests:
+
+    // ProductRepository tests:
+
+
+    // Create and save a new product to repository
     @Test
     public void createNewProduct() {
-
+        Category category = new Category("Motorbike");
+        Product product = new Product("Testbike", "test", 2900.00, "Testbike test", "This bike is in a test phase",
+                "many colors", 2050, category);
+        productRepository.save(product);
+        assertThat(product.getProductId()).isNotNull();
     }
 
+    // Delete product from repository
     @Test
     public void deleteProduct() {
+        Category category = new Category("Motorbike");
+        Product product = new Product("Testbike", "test", 2900.00, "Testbike test", "This bike is in a test phase",
+                "many colors", 2050, category);
+        productRepository.save(product);
+        Long productId = product.getProductId();
+        productRepository.deleteById(productId);
+        Product deletedProduct = productRepository.findById(productId).orElse(null);
+
+        assertNull(deletedProduct);
 
     }
 
+    // Find product by name from repository
     @Test
     public void findProductByName() {
+        Product product = productRepository.findByName("Kawasaki ZX-6R");
+        Product nonExistentProduct = productRepository.findByName("Suzuki GSX-R1000");
+
+        assertThat(product).isNotNull();
+        assertNull(nonExistentProduct);
 
     }
 
+    // Find all products in repository
     @Test
     public void findAllProducts() {
-        
+        List<Product> products = (List<Product>) productRepository.findAll();
+        assertThat(products).isNotNull();
+        assertThat(products.iterator().hasNext());
+        assertThat(products).isNotEmpty();
     }
 }
-
