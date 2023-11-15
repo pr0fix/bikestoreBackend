@@ -77,7 +77,7 @@ public class BikestoreApplication {
 			orderTwoItems.add(product2);
 
 			// orders
-			Order order1 = orderRepository.save(new Order(orderOneItems, admin, LocalDate.of(2023, 11, 3), LocalDate.of(2023, 9, 10), "cash"));
+			Order order1 = orderRepository.save(new Order(orderOneItems, admin, LocalDate.of(2023, 11, 3), LocalDate.of(2023, 9, 10), "credit"));
 			Order order2 = orderRepository.save(new Order(orderTwoItems, user, LocalDate.now(), LocalDate.now().plusDays(3), "debit"));
 
 			// fetch categories

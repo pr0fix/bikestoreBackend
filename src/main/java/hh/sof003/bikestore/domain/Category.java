@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "categories")
@@ -19,18 +20,28 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long categoryId;
-    private String name;
+
+    @NotBlank(message = "Category name cannot be empty.")
+    private String categoryName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Product> products;
 
-    public Category(String name) {
-        this.name = name;
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Category() {
-        this.name = null;
+        this.categoryName = null;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public long getCategoryId() {
@@ -39,14 +50,6 @@ public class Category {
 
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Product> getProducts() {
@@ -59,7 +62,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category [id=" + categoryId + ", name=" + name;
+        return "Category [id=" + categoryId + ", name=" + categoryName;
     }
 
 }

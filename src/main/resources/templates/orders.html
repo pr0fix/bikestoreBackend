@@ -1,94 +1,93 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<head>
-    <title>Orders</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
-    <link type="text/css" rel="stylesheet" href="/css/styles.css" th:href="@{css/styles.css}" />
-</head>
+    <head>
+        <title>Orders</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    </head>
 
-<body>
-    <div style="text-align: center;">
-        <h1>Orders</h1>
-        <a style="margin-bottom: 5px; margin-left: 2px;" href="/addorder" class="btn btn-primary">Create order</a>
-        <a style="margin-bottom: 5px; margin-left: 2px;" href="/productlist" class="btn btn-danger">Back to products</a>
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>Order ID</th>
-                <th>Order details</th>
-                <th>Products</th>
-                <th></th>
-            </tr>
+    <body>
+        <div style="text-align: center;">
+            <h1>Orders</h1>
+            <a style="margin-bottom: 5px; margin-left: 2px;" href="/addorder" class="btn btn-primary">Create order</a>
+            <a style="margin-bottom: 5px; margin-left: 2px;" href="/productlist" class="btn btn-danger">Back to products</a>
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order details</th>
+                    <th>Products</th>
+                    <th></th>
+                </tr>
 
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.orderId}"></td>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderId}"></td>
 
-                <td>
-                    <table style="text-align: center;">
-                        <tr>
-                            <th>Customer Id</th>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Order date</th>
-                            <th>Delivery date</th>
-                            <th>Payment method</th>
-                        </tr>
-                        <tr>
-                            <td th:text="${order.account.accountId}"></td>
-                            <td th:text="${order.account.firstName}"></td>
-                            <td th:text="${order.account.lastName}"></td>
-                            <td th:text="${order.account.email}"></td>
-                            <td th:text="${order.account.phone}"></td>
-                            <td th:text="${order.orderDate}"></td>
-                            <td th:text="${order.deliveryDate}"></td>
-                            <td th:text="${order.paymentMethod}"></td>
-                            
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table style="text-align: center;">
-                        <tr>
-                            <th>Product brand</th>
-                            <th>Product model</th>
-                            <th>Product price</th>
-                            <th>Product name</th>
-                            <th>Product description</th>
-                            <th>Product color</th>
-                            <th>Product manufacturing year</th>
-                            <th>Product category</th>
-                        </tr>
-                        <tr th:each="product : ${order.items}">
+                    <td>
+                        <table style="text-align: center;">
+                            <tr>
+                                <th>Customer Id</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Order date</th>
+                                <th>Delivery date</th>
+                                <th>Payment method</th>
+                            </tr>
+                            <tr>
+                                <td th:text="${order.account.accountId}"></td>
+                                <td th:text="${order.account.firstName}"></td>
+                                <td th:text="${order.account.lastName}"></td>
+                                <td th:text="${order.account.email}"></td>
+                                <td th:text="${order.account.phone}"></td>
+                                <td th:text="${order.orderDate}"></td>
+                                <td th:text="${order.deliveryDate}"></td>
+                                <td th:text="${order.paymentMethod}"></td>
+                                
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table style="text-align: center;">
+                            <tr>
+                                <th>Product brand</th>
+                                <th>Product model</th>
+                                <th>Product price</th>
+                                <th>Product name</th>
+                                <th>Product description</th>
+                                <th>Product color</th>
+                                <th>Product manufacturing year</th>
+                                <th>Product category</th>
+                            </tr>
+                            <tr th:each="product : ${order.items}">
 
-                            <td th:text="${product.brand}"></td>
-                            <td th:text="${product.model}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.color}"></td>
-                            <td th:text="${product.manufacturingYear}"></td>
-                            <td th:text="${product.category.name}"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td sec:authorize="hasAuthority('ADMIN')">
-                    <a th:href="@{/deleteOrder/{orderId}(orderId=${order.orderId})}" class="btn btn-danger">
-                        Delete
-                    </a>
-                </td>
-            </tr>
-        </table>
+                                <td th:text="${product.brand}"></td>
+                                <td th:text="${product.model}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.description}"></td>
+                                <td th:text="${product.color}"></td>
+                                <td th:text="${product.manufacturingYear}"></td>
+                                <td th:text="${product.category.categoryName}"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/deleteOrder/{orderId}(orderId=${order.orderId})}" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </table>
 
-    </div>
+        </div>
 
 
-</body>
+    </body>
 
-</html>
+    </html>

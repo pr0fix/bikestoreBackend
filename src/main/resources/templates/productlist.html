@@ -51,7 +51,7 @@
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.manufacturingYear != null ? product.manufacturingYear : ''}"></td>
                 <td th:text="${product.price}"></td>
-                <td th:text="${product.category.name}"></td>
+                <td th:text="${product.category.categoryName}"></td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/edit/{id} (id=${product.productId})}" class="btn btn-warning">Edit</a>
                 </td>

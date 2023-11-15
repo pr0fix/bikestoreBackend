@@ -108,7 +108,7 @@ public class BikestoreRepositoryTests {
     // Find category by name from repository
     @Test
     public void findCategoryByName() {
-        List<Category> categories = categoryRepository.findByName("Motorcycles");
+        List<Category> categories = categoryRepository.findByCategoryName("Motorcycles");
 
         assertThat(categories).hasSize(1);
         assertThat(categories.get(0).getCategoryId()).isEqualTo(1);
