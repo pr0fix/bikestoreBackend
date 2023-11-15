@@ -15,6 +15,14 @@
 		<form th:object="${order}" th:action="@{/saveorder}" action="#" method="post">
 
 			<div>
+				<label>Items: </label>
+				<div th:each="product : ${products}">
+					<input type="checkbox" th:id="'product_' + ${product.productId}" th:name="'items'" th:value="${product.productId}" />
+					<label style="text-shadow: none;" th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br/>
+				</div>
+			</div>
+
+			<div>
 				<label for="orderDate">Order date: </label>
 				<input type="date" id="orderDate" th:field="*{orderDate}">
 			</div>
@@ -29,14 +37,6 @@
 					<option value="credit">Credit</option>
 					<option value="banktransfer">Bank transfer</option>
 				</select>
-			</div>
-			
-			<div>
-				<label>Items: </label>
-				<div th:each="product : ${products}">
-					<input type="checkbox" th:id="'product_' + ${product.productId}" th:name="'items'" th:value="${product.productId}" />
-					<label style="text-shadow: none;" th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br/>
-				</div>
 			</div>
 
 			<div>

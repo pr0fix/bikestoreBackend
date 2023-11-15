@@ -15,6 +15,15 @@
         <form th:object="${order}" th:action="@{/saveorder}" action="#" method="post" >
 
             <div>
+                <label>Items to order: </label>
+                <div style="text-shadow: none;" th:each="product : ${products}">
+                    <input type="checkbox" th:id="'product_' + ${product.productId}" th:name="items"
+                        th:value="${product.productId}" />
+                    <label th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br />
+                </div>
+            </div>
+            
+            <div>
                 <label for="paymentMethod">Payment method: </label>
                 <select id="paymentMethod" th:field="*{paymentMethod}">
                     <option value="debit">Debit</option>
@@ -24,16 +33,7 @@
             </div>
 
             <div>
-                <label>Items: </label>
-                <div style="text-shadow: none;" th:each="product : ${products}">
-                    <input type="checkbox" th:id="'product_' + ${product.productId}" th:name="items"
-                        th:value="${product.productId}" />
-                    <label th:for="'product_' + ${product.productId}" th:text="${product.name}"></label><br />
-                </div>
-            </div>
-
-            <div>
-                <label for="account">Username: </label>
+                <label for="account">Your username: </label>
                 <input type="text" id="account" th:field="*{account.username}" readonly="readonly" />
                 <input type="hidden" th:field="*{account}">
             </div>

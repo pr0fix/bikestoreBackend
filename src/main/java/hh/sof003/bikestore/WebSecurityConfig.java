@@ -54,7 +54,6 @@ public class WebSecurityConfig {
 					authorize.anyRequest().authenticated();
 				})
 				.csrf(csrf -> csrf
-
 						.ignoringRequestMatchers("/h2-console/**"))
 				.headers(headers -> headers
 						.frameOptions(frameoptions -> frameoptions
